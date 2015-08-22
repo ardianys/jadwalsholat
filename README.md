@@ -19,4 +19,9 @@ You can choose output format between json and csv
 * scrapy crawl jadwalsholat -o jadwal.csv
 
 You can add date variable in output filename to store the result based on date
+
 ``scrapy crawl jadwalsholat -o "$(date +'%Y-%m').json"``
+
+It would generate file like this
+
+``/home/user/jadwalsholat/2015-08.json``
