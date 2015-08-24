@@ -15,12 +15,12 @@ Scrapy, check installation steps on http://doc.scrapy.org/en/latest/intro/instal
 How to use
 =====
 You can choose output format between json and csv
-* scrapy crawl jadwalsholat -o jadwal.json
-* scrapy crawl jadwalsholat -o jadwal.csv
+* scrapy crawl jadwalsholat -a city_id=83 -o jadwal.json
+* scrapy crawl jadwalsholat -a city_id=83 -o jadwal.csv
 
 You can add date variable in output filename to store the result based on date
 
-``scrapy crawl jadwalsholat -o "$(date +'%Y-%m').json"``
+``scrapy crawl jadwalsholat -a city_id=83 -o "$(date +'%Y-%m').json"``
 
 It would generate file like this
 

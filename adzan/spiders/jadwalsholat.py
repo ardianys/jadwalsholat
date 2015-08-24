@@ -3,10 +3,13 @@ import scrapy
 
 from adzan.items import AdzanItem
 
-class JadwalshalatSpider(scrapy.Spider):
+class JadwalsholatSpider(scrapy.Spider):
     name            = "jadwalsholat"
-    allowed_domains = ["http://jadwalsholat.pkpu.or.id/monthly.php?id=267"]
-    start_urls      = ('http://jadwalsholat.pkpu.or.id/monthly.php?id=267',)
+    allowed_domains = ["http://jadwalsholat.pkpu.or.id/"]
+
+    def __init__(self, city_id=83, *args, **kwargs):
+        super(JadwalsholatSpider, self).__init__(*args, **kwargs)
+        self.start_urls = ['http://jadwalsholat.pkpu.or.id/monthly.php?id=%s' % city_id]
 
     def parse(self, response):
         date   = []
