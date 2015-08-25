@@ -10,6 +10,7 @@ class JadwalsholatSpider(scrapy.Spider):
     def __init__(self, city_id=83, *args, **kwargs):
         super(JadwalsholatSpider, self).__init__(*args, **kwargs)
         self.start_urls = ['http://jadwalsholat.pkpu.or.id/monthly.php?id=%s' % city_id]
+        self.city_id    = city_id
 
     def parse(self, response):
         date   = []
@@ -23,7 +24,7 @@ class JadwalsholatSpider(scrapy.Spider):
 
         for i in xrange(0, len(date)):
             item = AdzanItem()
-            item['c'] = 267
+            item['c'] = self.city_id
             item['d'] = i+1
             item['s'] = jadwal[i+0+i*5]
             item['t'] = jadwal[i+1+i*5]
