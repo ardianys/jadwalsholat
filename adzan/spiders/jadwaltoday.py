@@ -1,16 +1,29 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import csv
+import os
 
 from adzan.items import AdzanItem
 
 class JadwaltodaySpider(scrapy.Spider):
     name            = "jadwaltoday"
     allowed_domains = ["http://jadwalsholat.pkpu.or.id/"]
+    cities          = {}
 
     def __init__(self, city_id=83, *args, **kwargs):
         super(JadwaltodaySpider, self).__init__(*args, **kwargs)
         self.start_urls = ['http://jadwalsholat.pkpu.or.id/monthly.php?id=%s' % city_id]
         self.city_id    = city_id
+        root_dir = os.path.abspath(os.path.dirname(__file__))
+        csv_path = os.path.join(root_dir, '../data/cities.csv')
+        with open(csv_path,"rb") as source:
+          reader= csv.reader( source )
+          for r in reader:
+            self.cities[r[0]] = r[1]
+        try:
+          self.cities[city_id]
+        except Exception:
+          raise Exception('city_id not available, please check ./data/cities.csv')
 
     def parse(self, response):
         jadwal = []
